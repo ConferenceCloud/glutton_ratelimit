@@ -29,6 +29,15 @@ module GluttonRatelimit
         yield
       end
     end
+
+    def each(iter, &block)
+      raise ArgumentError, "Code block expected"  if not block
+      # raise ArgumentError, "Parameter expected to be Fixnum but found a #{num.class}."  unless num.class.equal?(Fixnum)
+      iter.each do |var|
+        wait
+        yield var
+      end
+    end
   end
 end
 
@@ -36,3 +45,7 @@ dir = File.expand_path(File.dirname(__FILE__))
 require File.join(dir, "glutton_ratelimit", "bursty_ring_buffer")
 require File.join(dir, "glutton_ratelimit", "bursty_token_bucket")
 require File.join(dir, "glutton_ratelimit", "averaged_throttle")
+
+# rl.each([1,2,3]) do |i|
+#   p i
+# end

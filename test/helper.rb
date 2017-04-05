@@ -18,3 +18,13 @@ def timed_run ratelimiter, passes = 1
   before_last_invocation - start_time
 end
 
+def timed_each_run ratelimiter, passes = 1
+  before_last_invocation = 0
+  start_time = Time.now
+  ratelimiter.each(Array.new(passes * ratelimiter.executions + 1) { rand(1...9) }) do |i|
+    before_last_invocation = Time.now
+    yield i
+  end 
+  before_last_invocation - start_time
+end
+

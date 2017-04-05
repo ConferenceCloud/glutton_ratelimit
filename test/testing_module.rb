@@ -70,4 +70,13 @@ module TestingModule
     # puts "\n#{delta} >? #{min_time * runs}"
     assert((delta / (min_time * runs)) > TIMING_TOLERANCE)
   end
+
+  def test_10_tasks_every_1_seconds_each_run_with_short_rnd_task
+    min_time = 1
+    runs = 2
+    rl = @testClass.new 10, min_time
+    delta = timed_each_run(rl, 2) { |x| sleep(0.2 * rand) }
+
+    assert((delta / (min_time * runs)) > TIMING_TOLERANCE)
+  end
 end

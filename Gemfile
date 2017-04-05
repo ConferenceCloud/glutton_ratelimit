@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
 gem 'jeweler'
-gem 'test-unit'
+gem 'test-unit', '~> 1.2.3'
